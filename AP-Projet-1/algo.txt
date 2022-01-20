@@ -1,0 +1,251 @@
+ALGORITHMES DU PROJET
+
+structure Case:
+    occupé : Booléen
+    couleur : Caractère
+fin
+
+structure Plateau:
+    jeu : Matrice [TAILLE][TAILLE] de Case
+    nbBlanc : Entier
+    nbNoir : Entier
+fin
+
+Fonction creationPlateau(): Plateau
+    L: i, j: Entiers
+       plateau: Plateau
+    Pour i allant de 1 à 2 Faire
+        Pour j allant de 1 à 9 Faire
+            plateau.jeu[i][j].couleur <- 'N'
+            plateau.jeu[i][j].occupe <- VRAI
+        Fait
+    Fait
+    Pour i allant de 3 à 7 Faire
+        Pour j allant de 1 à 9 Faire
+            plateau.jeu[i][j].couleur <- '.'
+            plateau.jeu[i][j].occupe <- FAUX
+        Fait
+    Fait 
+    Pour i allant de 8 à 9 Faire
+        Pour j allant de 1 à 9 Faire
+            plateau.jeu[i][j].couleur <- 'B'
+            plateau.jeu[i][j].occupe <- VRAI
+        Fait 
+    Fait 
+    plateau.nbBlanc <- 18
+    plateau.nbNoir <- 18
+    Retourner: jeu
+Ffonction
+
+Sous-programme lectureCoup
+Action lectureCoup(jeu, tour):
+    D: tour : Caractère
+    D/R: jeu : Matrice [TAILLE][TAILLE] de Case
+    R: coup : Chaîne de caractères
+    L: possible : Booléen
+       i : Entier
+       j : Entier
+       saisie : Chaîne de caractères
+    possible <- FAUX
+    Tantque (non possible) Faire
+        afficher("Veuillez saisir un coup : ")
+        lire(saisie)
+        coup[1] <- saisie[1] - 'A' + 1
+        coup[2] <- saisie[2] - '1' + 1
+        coup[3] <- saisie[4] - 'A' + 1
+        coup[4] <- saisie[5] - '1' + 1
+        Si (jeu[coup[1]][coup[2]].couleur = tour) Alors
+            Si (jeu[coup[3]][coup[4]].occupé = FAUX) Alors
+                Si ((coup[1] = coup[3]) Alors
+                    i <- coup[1]
+                    Si (coup[4] - coup[2] > 2) Alors
+                        j <- coup[2]+1
+                        Tantque ((j<coup[4]) ET (jeu[i][j].occupé = FAUX))
+                            j <- j + 1
+                        Fait
+                        Si (j = coup[4]) Alors
+                            possible <- VRAI
+                        Sinon Alors
+                            afficher("Il y a d'autres pions sur le chemin de votre pion.")
+                        Fsi
+                    Sinon si (coup[4] - coup[2] < -2) Alors
+                        j <- coup[4]+1
+                        Tantque ((j<coup[2]) ET (jeu[i][j].occupé = FAUX))
+                            j <- j + 1
+                        Fait
+                        Si (j = coup[2]) Alors
+                            possible <- VRAI
+                        Sinon Alors
+                            afficher("Il y a d'autres pions sur le chemin de votre pion.")
+                        Fsi
+                    Sinon Alors
+                        possible <- VRAI
+                    Fsi
+                Sinon si (coup[2] = coup[4])) Alors
+                    j <- coup[2]
+                    Si (coup[3] - coup[1] > 2) Alors
+                        i <- coup[1]+1
+                        Tantque ((i<coup[3]) ET (jeu[i][j].occupé = FAUX))
+                            i <- i + 1
+                        Fait
+                        Si (i = coup[3]) Alors
+                            possible <- VRAI
+                        Sinon Alors
+                            afficher("Il y a d'autres pions sur le chemin de votre pion.")
+                        Fsi
+                    Sinon si (coup[3] - coup[1] < -2) Alors
+                        i <- coup[3]+1
+                        Tantque ((i<coup[1]) ET (jeu[i][j].occupé = FAUX))
+                            i <- i + 1
+                        Fait
+                        Si (i = coup[1]) Alors
+                            possible <- VRAI
+                        Sinon Alors
+                            afficher("Il y a d'autres pions sur le chemin de votre pion.")
+                        Fsi
+                    Sinon Alors
+                        possible <- VRAI
+                    Fsi
+                Sinon Alors
+                    afficher("Le déplacement de votre pion n'est pas rectiligne.")
+                Fsi
+            Sinon Alors
+                afficher("Il y a déjà pion sur la case d'arrivée.")
+            Fsi
+        Sinon Alors
+            afficher("Ce n'est pas à votre tour de jouer.")
+        Fsi
+    Fait
+    jeu[coup[1]][coup[2]].occupé <- FAUX
+    jeu[coup[3]][coup[4]].occupé <- VRAI
+    jeu[coup[3]][coup[4]].couleur <- tour
+    jeu[coup[1]][coup[2]].couleur <- '.'
+Faction
+
+Sous-programme capture
+Action capture(plateau, coup):
+    D: coup: Vecteur[4] d'entiers
+    D/R: plateau: Plateau
+    L: i: Entier 
+       pos: Entier
+
+    {Parcours de la ligne sens positif}
+    i <- coup[3]+1
+    Tantque ((i < 10) ET (plateau.jeu[i][coup[4]].couleur != tour)) Faire
+        i <- i+1
+    Fait
+    Si (i < 10) Alors
+        pos <- i
+        i <- coup[3]+1
+        Tantque ((i < pos) ET (plateau.jeu[i][coup[4]].couleur != '.')) Faire
+            i <- i+1
+        Fait
+        Si (i = pos) Alors
+            Pour i allant de coup[3]+1 à pos-1 faire
+                plateau.jeu[i][coup[4]].couleur <- '.'
+                plateau.jeu[i][coup[4]].occupe <- FAUX
+            Fait
+            Si (tour='B') Alors
+                plateau.nbNoir <- plateau.nbNoir - (pos-coup[3]-1)
+            Sinon
+                plateau.nbBlanc <- plateau.nbBlanc - (pos-coup[3]-1)
+            Fin si
+        Fsi
+    Fsi
+
+    {Parcours de la ligne sens négatif}
+    i <- coup[3]-1
+    Tantque ((i > 0) && (plateau.jeu[i][coup[4]].couleur != tour)) Faire
+        i <- i-1
+    Fait
+    Si (i > 0) Alors
+        pos <- i
+        i <- coup[3]-1
+        Tantque ((i > pos) && (plateau.jeu[i][coup[4]].couleur != '.')) Faire
+            i <- i-1
+        Fait
+        Si (i = pos) Alors
+            Pour i allant de pos+1 à coup[3]-1 faire
+                plateau.jeu[i][coup[4]].couleur <- '.'
+                plateau.jeu[i][coup[4]].occupe <- FAUX
+            Fait
+            Si (tour='B') Alors
+                plateau.nbNoir <- plateau.nbNoir - (coup[3]-pos-1)
+            Sinon
+                plateau.nbBlanc <- plateau.nbBlanc - (coup[3]-pos-1)
+            Fin si
+        Fsi
+    Fsi
+
+    {Parcours de la colonne sens positif}
+    i <- coup[4]+1
+    Tantque ((i < 10) && (plateau.jeu[coup[3]][i].couleur != tour)) Faire
+        i <- i+1
+    Fait
+    Si (i < 10) Alors
+        pos <- i
+        i <- coup[4]+1
+        Tantque ((i < pos) && (plateau.jeu[coup[3]][i].couleur != '.')) Faire
+            i <- i+1
+        Fait
+        Si (i = pos) Alors
+            Pour i allant de coup[4]+1 à pos-1 faire
+                plateau.jeu[coup[3]][i].couleur <- '.'
+                plateau.jeu[coup[3]][i].occupe <- FAUX
+            Fait
+            Si (tour='B') Alors
+                plateau.nbNoir <- plateau.nbNoir - (pos-coup[4]-1)
+            Sinon
+                plateau.nbBlanc <- plateau.nbBlanc - (pos-coup[4]-1)
+            Fin si
+        Fsi
+    Fsi
+
+    {Parcours de la colonne sens négatif}
+    i <- coup[4]-1
+    Tantque ((i > 0) && (plateau.jeu[coup[3]][i].couleur != tour)) Faire
+        i <- i-1
+    Fait
+    Si (i > 0) Alors
+        pos <- i
+        i <- coup[4]-1
+        Tantque ((i > pos) && (plateau.jeu[coup[3]][i].couleur != '.')) Faire
+            i <- i-1
+        Fait
+        Si (i = pos) Alors
+            Pour i allant de pos+1 à coup[4]-1 faire
+                plateau.jeu[coup[3]][i].couleur <- '.'
+                plateau.jeu[coup[3]][i].occupe <- FAUX
+            Fait
+            Si (tour='B') Alors
+                plateau.nbNoir <- plateau.nbNoir - (coup[4]-pos-1)
+            Sinon
+                plateau.nbBlanc <- plateau.nbBlanc - (coup[4]-pos-1)
+            Fin si
+        Fsi
+    Fsi
+Faction
+
+Sous-programme affichage
+Action affichage(plateau):
+    D: plateau : Plateau
+    L: i : Entier
+       j : Entier
+    afficher("\n  1 2 3 4 5 6 7 8 9 \n")
+    Pour i allant de 1 à 9 Faire
+        afficher('A' + i - 2)
+        afficher(' ')
+        Pour j allant de 1 à 9 Faire
+            afficher(plateau.jeu[i][j].couleur)
+            afficher(' ')
+        Fait
+        afficher('\n')
+    Fait
+    afficher('\n')
+    afficher('Pions Blancs : ')
+    afficher(plateau.nbBlanc)
+    afficher('\n')
+    afficher('Pions Noirs : ')
+    afficher(plateau.nbNoir)
+    afficher('\n')
+Faction
