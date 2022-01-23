@@ -1,3 +1,8 @@
+/*
+    AUTHORS : DEBOUVRIES Ryan and LE BRIS Maxime
+    DATE : January 2022
+*/
+
 #include <stdio.h>
 
 // Définition de nos booléens
