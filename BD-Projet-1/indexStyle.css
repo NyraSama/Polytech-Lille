@@ -1,0 +1,103 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	line-height: 125%;
+	text-decoration: none;
+}
+a{
+	color: black;
+}
+body {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	padding: 0 3rem 0 3rem;
+}
+header{
+	width: 100%;
+	margin-bottom: 2rem;
+	}
+	h1{
+		width: 100%;
+		text-align: right;
+		padding: 1rem 0 0 0;
+	}
+	.menu{
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		flex-flow: row wrap;
+		list-style: none;
+		}
+		.menu li{
+			margin: 0 1rem 0 1rem;
+		}
+
+h3{
+	width: 100%;
+	text-align: left;
+	margin: 0 0 0.5rem 0;
+}
+
+.projectTable{
+	width: 100%;
+	margin: 1rem 0 1.5rem 0;
+	}
+	.projectTable form{
+		width: 100%;
+		display: flex;
+		flex-flow: column nowrap;
+		align-items: flex-end;
+		}
+		.projectTable form table {
+			border: 1px solid black;
+			width: 100%;
+			border-collapse: collapse;
+			}
+			.projectTable form table tr{
+				border-bottom: 0.1px solid #afafaf;
+				height: 1.75rem;
+			}
+			.projectTable form table tr:nth-child(1), .projectTable form table tr:last-child{
+				border-bottom: 0.1px solid #000000;
+			}
+
+
+.addProject{
+	width: 100%;
+	}
+	.addProject form{
+		width: 100%;
+		display: flex;
+		justify-content: flex-start;
+		align-items: flex-start;
+		flex-flow: column nowrap;
+		}
+		.addProject .formTop{
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			}
+			.addProject .formTop input{
+				width: 45%;
+				font-size: 10pt;
+			}
+		.addProject textarea{
+			font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+			width: 100%;
+			margin: 1rem 0 1rem 0;
+			resize: none;
+			font-size: 10pt;
+		}
+		.addProject .formBottom{
+			color: gray;
+			font-size: 10pt;
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			width: 100%;
+		}
+

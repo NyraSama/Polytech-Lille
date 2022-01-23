@@ -1,0 +1,152 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	line-height: 125%;
+	text-decoration: none;
+}
+a{
+	color: black;
+}
+body {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	padding: 0 3rem 0 3rem;
+}
+header{
+	width: 100%;
+	margin-bottom: 2rem;
+	}
+	h1{
+		width: 100%;
+		text-align: right;
+		padding: 1rem 0 0 0;
+	}
+	.menu{
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		flex-flow: row wrap;
+		list-style: none;
+		}
+		.menu li{
+			margin: 0 1rem 0 1rem;
+		}
+		
+h3{
+	width: 100%;
+	text-align: left;
+	margin: 0 0 0.5rem 0;
+}
+
+.taskDescription{
+	width: 100%;
+	text-align: left;
+	margin: 0 0 1.5rem 0;
+}
+
+.responsableTable{
+	width: 100%;
+	margin: 0 0 1rem 0;
+	}
+	.responsableTable table {
+		border: 1px solid black;
+		width: 100%;
+		border-collapse: collapse;
+		}
+		.responsableTable table tr{
+			border-bottom: 0.1px solid #000000;
+			height: 1.75rem;
+		}
+
+.modifManager{
+	width: 100%;
+	margin: 0 0 1.5rem 0;
+	}
+	.modifManager form{
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		}
+		.modifManager form label{
+			min-width: 11.9rem;
+		}
+		.modifManager form input:nth-child(3){
+			width: 80%;
+		}
+		.modifManager form input[type=submit]{
+			width: 20%;
+			min-width: 3rem;
+		}
+		
+				
+.workerTable{
+	width: 100%;
+	margin: 0 0 1rem 0;
+	}
+	.workerTable form{
+		width: 100%;
+		display: flex;
+		flex-flow: column nowrap;
+		align-items: flex-end;
+		}
+		.workerTable form table {
+			border: 1px solid black;
+			width: 100%;
+			border-collapse: collapse;
+			}
+			.workerTable form table tr{
+				border-bottom: 0.1px solid #afafaf;
+				height: 1.75rem;
+			}
+			.workerTable form table tr:nth-child(1), .workerTable form table tr:last-child{
+				border-bottom: 0.1px solid #000000;
+			}
+
+.addWorker{
+	width: 100%;
+	margin: 0 0 1.5rem 0;
+	}
+	.addWorker form{
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		
+		}
+		.addWorker form label{
+			min-width: 11rem;
+		}
+		.addWorker form input[type=number], .addWorker form input[type=text]{
+			width: 40%;
+		}
+		.addWorker form input[type=submit]{
+			width: 20%;
+			min-width: 3rem;
+		}
+
+
+.modifState{
+	width: 100%;
+	margin: 0 0 1.5rem 0;
+	}
+	.modifState form{
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		
+		}
+		.modifState form input[type=date]{
+			width: 35%;
+		}
+		.modifState form select{
+			width: 35%;
+		}
+		.modifState form input[type=submit]{
+			width: 20%;
+			min-width: 3rem;
+		}
